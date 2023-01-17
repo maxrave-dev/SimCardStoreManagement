@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/itHome"
+        android:title="Tổng quan"
+        android:icon="@drawable/home_24px"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom|collapseActionView"
+        app:actionViewClass="android.widget.SearchView"
+        />
+    <item android:id="@+id/itManage"
+        android:title="Quản lý"
+        android:icon="@drawable/settings_24px"
+        android:orderInCategory="100"
+        app:showAsAction="withText" />
+
+    <item android:id="@+id/itNotification"
+        android:title="Thông báo"
+        android:icon="@drawable/notifications_24px"
+        android:orderInCategory="100"
+        app:showAsAction="withText" />
+</menu>

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="5sp">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewNotExpandable">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivAvatar"
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:layout_margin="5sp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img"
+            app:shapeAppearanceOverlay="@style/circleImageView">
+
+        </com.google.android.material.imageview.ShapeableImageView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tvUserName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nguyễn Đức Tuấn Minh"
+                    android:textAppearance="?attr/textAppearanceTitleSmall" />
+                <TextView
+                    android:id="@+id/tvUserCode"
+                    android:layout_marginStart="15sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NV101">
+
+                </TextView>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tvUserRole"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Kế toán, Quản lý"
+                android:textAppearance="?attr/textAppearanceBodySmall"
+                android:textColor="?android:attr/textColorSecondary" />
+
+        </LinearLayout>
+    </LinearLayout>
+        <ImageView
+            android:id="@+id/ivExpandDown"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/baseline_keyboard_arrow_down_24"
+            android:contentDescription="@string/app_name"
+            android:visibility="visible">
+
+        </ImageView>
+        <ImageView
+            android:id="@+id/ivExpandUp"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/baseline_keyboard_arrow_up_24"
+            android:contentDescription="@string/app_name"
+            android:visibility="gone">
+
+        </ImageView>
+
+</RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/expandableLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/viewNotExpandable"
+        android:orientation="vertical"
+        android:padding="5sp"
+        android:layout_marginStart="10sp"
+        android:layout_marginEnd="10sp">
+
+        <TextView
+            android:padding="2sp"
+            android:id="@+id/tvEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email: ">
+
+        </TextView>
+        <TextView
+            android:padding="2sp"
+            android:id="@+id/tvAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Địa chỉ: ">
+
+        </TextView>
+         <TextView
+                android:padding="2sp"
+                android:layout_marginEnd="60sp"
+                android:id="@+id/tvSalary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lương: 5,000,000">
+
+            </TextView>
+        <TextView
+            android:padding="2sp"
+            android:id="@+id/tvManager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mã Quản lý: ">
+
+        </TextView>
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:padding="2sp"
+                android:layout_marginEnd="55sp"
+                android:id="@+id/tvBirthday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ngày sinh: 26/08/2003">
+
+            </TextView>
+            <TextView
+                android:padding="2sp"
+                android:id="@+id/tvSex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Giới tính: Nam">
+
+            </TextView>
+        </LinearLayout>
+        <TextView
+            android:padding="2sp"
+            android:id="@+id/tvPhoneNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SDT: ">
+
+        </TextView>
+        <TextView
+            android:padding="2sp"
+            android:id="@+id/tvPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mật khẩu: ">
+
+        </TextView>
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="end">
+        <Button
+            style="@style/Widget.Material3.Button.TextButton"
+            android:id="@+id/btDeleteUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Xoá nhân viên" />
+        <Button
+            style="@style/Widget.Material3.Button.TextButton"
+            android:id="@+id/btEditUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sửa thông tin"
+            />
+    </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "634513668270",
+    "project_id": "simcardstoremanagement",
+    "storage_bucket": "simcardstoremanagement.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:634513668270:android:dd377d54e4c96a569cd53f",
+        "android_client_info": {
+          "package_name": "com.maxrave.simcardstoremanagement"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "634513668270-4i9gatp34jk3jm9dds4mbr5ic0h0n463.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.maxrave.simcardstoremanagement",
+            "certificate_hash": "3e95a0c7f5bcea928b8c309b4571a35d152ccf11"
+          }
+        },
+        {
+          "client_id": "634513668270-0mcvifk9fas9l45gr59tri95q7e2ttc1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByPV54lRYR5yLYK-Tcp87CVjw2jhvl__4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "634513668270-0mcvifk9fas9l45gr59tri95q7e2ttc1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
