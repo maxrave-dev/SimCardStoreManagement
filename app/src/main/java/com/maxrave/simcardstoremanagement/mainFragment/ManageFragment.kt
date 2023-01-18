@@ -30,6 +30,7 @@ class ManageFragment : Fragment() {
         _binding = FragmentManageBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        //Quản lý nhân viên
         listUsers = ArrayList()
         var db = Firebase.firestore
         db.collection("NhanVien").get().addOnSuccessListener { result ->
@@ -79,6 +80,42 @@ class ManageFragment : Fragment() {
                 .addOnFailureListener { exception ->
 
                 }
+        //Quản lý kho
+        binding.StockExpandable.visibility = View.GONE
+        binding.ivStockExpandDown.visibility = View.VISIBLE
+        binding.ivStockExpandDown.setOnClickListener {
+            if (binding.StockExpandable.visibility == View.GONE) {
+                binding.StockExpandable.visibility = View.VISIBLE
+                binding.ivStockExpandDown.visibility = View.GONE
+                binding.ivStockExpandUp.visibility = View.VISIBLE
+            }
+        }
+        binding.ivStockExpandUp.setOnClickListener {
+            if (binding.StockExpandable.visibility == View.VISIBLE) {
+                binding.StockExpandable.visibility = View.GONE
+                binding.ivStockExpandDown.visibility = View.VISIBLE
+                binding.ivStockExpandUp.visibility = View.GONE
+            }
+        }
+
+        //Quản lý bán hàng
+        binding.SellExpandable.visibility = View.GONE
+        binding.ivSellExpandDown.visibility = View.VISIBLE
+        binding.ivSellExpandDown.setOnClickListener {
+            if (binding.SellExpandable.visibility == View.GONE) {
+                binding.SellExpandable.visibility = View.VISIBLE
+                binding.ivSellExpandDown.visibility = View.GONE
+                binding.ivSellExpandUp.visibility = View.VISIBLE
+            }
+        }
+        binding.ivSellExpandUp.setOnClickListener {
+            if (binding.SellExpandable.visibility == View.VISIBLE) {
+                binding.SellExpandable.visibility = View.GONE
+                binding.ivSellExpandDown.visibility = View.VISIBLE
+                binding.ivSellExpandUp.visibility = View.GONE
+            }
+        }
+
 
 
         return view

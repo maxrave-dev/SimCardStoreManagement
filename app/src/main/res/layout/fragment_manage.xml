@@ -36,7 +36,7 @@
                 android:textAppearance="?attr/textAppearanceTitleLarge" />
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cvAllTimeSell"
+                android:id="@+id/cvUserManage"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:clickable="true"
@@ -64,10 +64,10 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvListEmployee"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:listitem="@layout/item_users">
+                    android:layout_height="wrap_content">
 
                 </androidx.recyclerview.widget.RecyclerView>
+<!--                tools:listitem="@layout/item_users"-->
             </LinearLayout>
                 <Button
                     style="@style/Widget.Material3.Button.TextButton"
@@ -78,6 +78,218 @@
                     android:layout_gravity="end"
                     />
 
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvStockManage"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:checkable="true"
+                style="?attr/materialCardViewElevatedStyle"
+                android:layout_marginTop="10sp"
+                android:layout_marginBottom="10sp">
+
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Quản lý kho"
+                                android:textAppearance="?attr/textAppearanceTitleMedium" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="Kho, nhà cung cấp, tồn kho và sản phẩm"
+                                android:textAppearance="?attr/textAppearanceBodyMedium"
+                                android:textColor="?android:attr/textColorSecondary" />
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/ivStockExpandDown"
+                            android:layout_width="30sp"
+                            android:layout_height="30sp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="21sp"
+                            android:src="@drawable/baseline_keyboard_arrow_down_24"
+                            android:contentDescription="@string/app_name"
+                            android:visibility="visible">
+
+                        </ImageView>
+
+                        <ImageView
+                            android:id="@+id/ivStockExpandUp"
+                            android:layout_width="30sp"
+                            android:layout_height="30sp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="21sp"
+                            android:src="@drawable/baseline_keyboard_arrow_up_24"
+                            android:contentDescription="@string/app_name"
+                            android:visibility="gone">
+
+                        </ImageView>
+                    </RelativeLayout>
+                    <LinearLayout
+                        android:id="@+id/StockExpandable"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <Button
+                            style="@style/Widget.Material3.Button.TextButton"
+                            android:id="@+id/btStockManage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Kho"
+                            android:layout_gravity="center"
+                            />
+                        <Button
+                            style="@style/Widget.Material3.Button.TextButton"
+                            android:id="@+id/btProviderManage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nhà cung cấp"
+                            android:layout_gravity="center"
+                            />
+                        <Button
+                            style="@style/Widget.Material3.Button.TextButton"
+                            android:id="@+id/btArchiveManage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Lưu trữ"
+                            android:layout_gravity="center"
+                            />
+                        <Button
+                            style="@style/Widget.Material3.Button.TextButton"
+                            android:id="@+id/btProductManage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sản phẩm"
+                            android:layout_gravity="center"
+                            />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvSellManage"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:checkable="true"
+                style="?attr/materialCardViewElevatedStyle"
+                android:layout_marginTop="10sp"
+                android:layout_marginBottom="10sp">
+
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Quản lý bán hàng"
+                                android:textAppearance="?attr/textAppearanceTitleMedium" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="Khách hàng, đơn hàng, hoá đơn"
+                                android:textAppearance="?attr/textAppearanceBodyMedium"
+                                android:textColor="?android:attr/textColorSecondary" />
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/ivSellExpandDown"
+                            android:layout_width="30sp"
+                            android:layout_height="30sp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="21sp"
+                            android:src="@drawable/baseline_keyboard_arrow_down_24"
+                            android:contentDescription="@string/app_name"
+                            android:visibility="visible">
+
+                        </ImageView>
+
+                        <ImageView
+                            android:id="@+id/ivSellExpandUp"
+                            android:layout_width="30sp"
+                            android:layout_height="30sp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="21sp"
+                            android:src="@drawable/baseline_keyboard_arrow_up_24"
+                            android:contentDescription="@string/app_name"
+                            android:visibility="gone">
+
+                        </ImageView>
+                    </RelativeLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:id="@+id/SellExpandable">
+                        <Button
+                            style="@style/Widget.Material3.Button.TextButton"
+                            android:id="@+id/btCustomerManage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Khách hàng"
+                            android:layout_gravity="center"
+                            />
+                        <Button
+                            style="@style/Widget.Material3.Button.TextButton"
+                            android:id="@+id/btPromotionManage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Chương trình khuyến mãi"
+                            android:layout_gravity="center"
+                            />
+                        <Button
+                            style="@style/Widget.Material3.Button.TextButton"
+                            android:id="@+id/btBillManage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Hoá đơn"
+                            android:layout_gravity="center"
+                            />
+                    </LinearLayout>
+
+                </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>

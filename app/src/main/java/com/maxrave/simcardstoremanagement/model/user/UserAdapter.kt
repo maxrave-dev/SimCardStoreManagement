@@ -3,6 +3,8 @@ package com.maxrave.simcardstoremanagement.model.user
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -38,6 +40,7 @@ class UserAdapter(private var listUsers: ArrayList<user>): RecyclerView.Adapter<
 
     }
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_users, parent, false)
         return ViewHolder(itemView)
@@ -51,6 +54,7 @@ class UserAdapter(private var listUsers: ArrayList<user>): RecyclerView.Adapter<
         val formatter = NumberFormat.getCurrencyInstance()
         formatter.currency = Currency.getInstance("VND")
         formatter.minimumFractionDigits = 0 // set decimal places to 0
+
 
         val user = listUsers[position]
         holder.userName.text = "${user.hoNV} ${user.tenLot} ${user.tenNV}"
