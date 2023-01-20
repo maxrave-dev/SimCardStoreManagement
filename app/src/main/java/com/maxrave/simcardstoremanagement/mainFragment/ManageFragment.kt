@@ -69,7 +69,7 @@ class ManageFragment : Fragment() {
                 )
                 listUsers.add(user)
             }
-            var recyclerView: RecyclerView = binding.rvListEmployee
+            val recyclerView: RecyclerView = binding.rvListEmployee
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
             val adapter = UserAdapter(listUsers)
             recyclerView.adapter = adapter
