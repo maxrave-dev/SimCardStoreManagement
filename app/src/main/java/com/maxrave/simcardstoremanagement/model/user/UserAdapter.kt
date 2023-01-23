@@ -3,20 +3,22 @@ package com.maxrave.simcardstoremanagement.model.user
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.google.android.material.imageview.ShapeableImageView
 import com.maxrave.simcardstoremanagement.R
+import com.maxrave.simcardstoremanagement.other.EditDialog
 import java.text.NumberFormat
 import java.util.*
-import kotlin.collections.ArrayList
+import android.content.Context
+import android.os.Bundle
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
-class UserAdapter(private var listUsers: ArrayList<user>): RecyclerView.Adapter<UserAdapter.ViewHolder>() {
+class UserAdapter(private var listUsers: ArrayList<user>, var context: Context): RecyclerView.Adapter<UserAdapter.ViewHolder>() {
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         var avatar = itemView.findViewById<ShapeableImageView>(R.id.ivAvatar)
         var userName = itemView.findViewById<TextView>(R.id.tvUserName)
@@ -31,6 +33,9 @@ class UserAdapter(private var listUsers: ArrayList<user>): RecyclerView.Adapter<
         var sex = itemView.findViewById<TextView>(R.id.tvSex)
         var phoneNumber = itemView.findViewById<TextView>(R.id.tvPhoneNumber)
         var password = itemView.findViewById<TextView>(R.id.tvPassword)
+
+        var btEdit = itemView.findViewById<Button>(R.id.btEditUser)
+        var btDelete = itemView.findViewById<Button>(R.id.btDeleteUser)
 
         var expandableLayout = itemView.findViewById<LinearLayout>(R.id.expandableLayout)
 
@@ -94,5 +99,52 @@ class UserAdapter(private var listUsers: ArrayList<user>): RecyclerView.Adapter<
                 isExpanded = false
             }
         }
+        var userID: String? = null
+        var db = Firebase.firestore
+        var refUser = db.collection("NhanVien").whereEqualTo("MaNV", user.maNV)
+        refUser.get().addOnSuccessListener { documents ->
+            for (document in documents) {
+                userID = document.id
+            }
+        }
+        holder.btEdit.setOnClickListener {
+            var dialogEditUser = EditDialog()
+            var args = Bundle()
+            args.putString("LastName", user.hoNV)
+            args.putString("MiddleName", user.tenLot)
+            args.putString("FirstName", user.tenNV)
+            args.putString("Role", user.chucVu)
+            args.putString("Address", user.diaChi)
+            args.putString("Email", user.email)
+            args.putString("Password", user.matKhau)
+            args.putString("Salary", user.luong.toString())
+            args.putString("PhoneNumber", user.sDT)
+            args.putString("Birthday", user.ngaySinh)
+            args.putString("Sex", user.phai)
+            args.putString("UserCode", user.maNV)
+            args.putString("ManagerCode", user.maNQL)
+            args.putString("ID", userID)
+            dialogEditUser.arguments = args
+            var fm = (context as AppCompatActivity).supportFragmentManager
+            dialogEditUser.show(fm, "Edit User")
+        }
+        holder.btDelete.setOnClickListener{
+            MaterialAlertDialogBuilder(context)
+                .setTitle("Cảnh báo")
+                .setMessage("Bạn có chắc chắn muốn xoá nhân viên ${user.hoNV} ${user.tenLot} ${user.tenNV} không?")
+                .setNegativeButton("Hủy") { dialog, which ->
+                    // Respond to negative button press
+                }
+                .setPositiveButton("Xoá") { dialog, which ->
+                    // Respond to positive button press
+                        db.collection("NhanVien").document(userID!!).delete()
+                            .addOnSuccessListener {
+                                Toast.makeText(context, "Xoá thành công", Toast.LENGTH_SHORT).show()
+                            }
+                            .addOnFailureListener {
+                                Toast.makeText(context, "Xoá thất bại", Toast.LENGTH_SHORT).show()
+                            }
+                    }.show()
+                }
     }
 }

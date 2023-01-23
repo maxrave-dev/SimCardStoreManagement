@@ -11,5 +11,7 @@ data class Notification(
     @SerializedName("NoiDung")
     val noiDung: String,
     @SerializedName("ThoiDiemDang")
-    val thoiDiemDang: Int
+    val thoiDiemDang: Int,
+    @SerializedName("MaTB")
+    val maTB: String
 )

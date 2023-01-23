@@ -7,15 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.maxrave.simcardstoremanagement.R
-import com.maxrave.simcardstoremanagement.databinding.FragmentHomeBinding
 import com.maxrave.simcardstoremanagement.databinding.FragmentManageBinding
 import com.maxrave.simcardstoremanagement.model.user.UserAdapter
 import com.maxrave.simcardstoremanagement.model.user.user
+import com.maxrave.simcardstoremanagement.other.AddUserDialog
 
 class ManageFragment : Fragment() {
     private var _binding : FragmentManageBinding? = null
@@ -71,15 +71,20 @@ class ManageFragment : Fragment() {
             }
             val recyclerView: RecyclerView = binding.rvListEmployee
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
-            val adapter = UserAdapter(listUsers)
+            val adapter = UserAdapter(listUsers, requireActivity())
             recyclerView.adapter = adapter
+            var decoration = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+            recyclerView.addItemDecoration(decoration)
             recyclerView.setHasFixedSize(true)
-
-
         }
                 .addOnFailureListener { exception ->
 
                 }
+        binding.btAddUser.setOnClickListener{
+            val dialog = AddUserDialog()
+            dialog.show(requireActivity().supportFragmentManager, "AddUserDialog")
+
+        }
         //Quản lý kho
         binding.StockExpandable.visibility = View.GONE
         binding.ivStockExpandDown.visibility = View.VISIBLE

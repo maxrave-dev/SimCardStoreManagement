@@ -14,7 +14,6 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.maxrave.simcardstoremanagement.R
 import java.util.*
-import kotlin.collections.ArrayList
 
 class NotificationAdapter(private var listNotification: ArrayList<Notification>): RecyclerView.Adapter<NotificationAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -35,6 +34,10 @@ class NotificationAdapter(private var listNotification: ArrayList<Notification>)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        var user = Firebase.auth.currentUser
+        var email = user?.email
+
+
         val notification = listNotification[position]
         var timeStamp = notification.thoiDiemDang
         var date = Date(timeStamp.toLong() * 1000)
@@ -42,33 +45,62 @@ class NotificationAdapter(private var listNotification: ArrayList<Notification>)
         holder.content.text = notification.noiDung
         holder.loveCount.text = notification.dSNVLike.size.toString()
         var db = Firebase.firestore
-        val userRef = db.collection("NhanVien").whereEqualTo("MaNV", notification.maNV)
-        userRef.get().addOnSuccessListener { documents ->
+        var emailRef = db.collection("NhanVien").whereEqualTo("Email", email)
+        emailRef.get().addOnSuccessListener { documents ->
             for (document in documents) {
-                holder.userName.text = document.data["HoNV"].toString() + " " + document.data["TenLot"].toString() + " " + document.data["TenNV"].toString()
-                Log.d("Tên", document.data["HoNV"].toString() + " " + document.data["TenLot"].toString() + " " + document.data["TenNV"].toString())
-                holder.userCode.text = document.data["MaNV"].toString()
-                holder.userRole.text = document.data["ChucVu"].toString()
-                var avatar = document.data["Avatar"].toString()
-                if (avatar != "")
-                {
-                    holder.avatar.load(avatar)
+                var maNV = document.data["MaNV"].toString()
+                holder.love.isChecked = notification.dSNVLike.contains(maNV)
+            }
+            val userRef = db.collection("NhanVien").whereEqualTo("MaNV", notification.maNV)
+            userRef.get().addOnSuccessListener { documents ->
+                for (document in documents) {
+                    holder.userName.text =
+                        document.data["HoNV"].toString() + " " + document.data["TenLot"].toString() + " " + document.data["TenNV"].toString()
+                    Log.d(
+                        "Tên",
+                        document.data["HoNV"].toString() + " " + document.data["TenLot"].toString() + " " + document.data["TenNV"].toString()
+                    )
+                    holder.userCode.text = document.data["MaNV"].toString()
+                    holder.userRole.text = document.data["ChucVu"].toString()
+                    var avatar = document.data["Avatar"].toString()
+                    if (avatar != "") {
+                        holder.avatar.load(avatar)
+                    } else {
+                        holder.avatar.load(R.drawable.manage_accounts_24px)
+                    }
                 }
-                else
-                {
-                    holder.avatar.load(R.drawable.manage_accounts_24px)
+            }
+            var dsNVLikeTemp = notification.dSNVLike
+            holder.love.setOnCheckedChangeListener { buttonView, isChecked ->
+                if (isChecked) {
+                    holder.loveCount.text =
+                        (holder.loveCount.text.toString().toInt() + 1).toString()
+                    emailRef.get().addOnSuccessListener { documents ->
+                        for (document in documents) {
+                            var maNV = document.data["MaNV"].toString()
+                            var notificationRef =
+                                db.collection("ThongBao").document(notification.maTB)
+                            notificationRef.update("DSNVLike", dsNVLikeTemp + maNV)
+                            dsNVLikeTemp = dsNVLikeTemp + maNV
+                        }
+                    }
+                } else {
+                    holder.loveCount.text =
+                        (holder.loveCount.text.toString().toInt() - 1).toString()
+                    emailRef.get().addOnSuccessListener { documents ->
+                        for (document in documents) {
+                            var maNV = document.data["MaNV"].toString()
+                            Log.d("Mã nhân viên", maNV)
+                            var notificationRef =
+                                db.collection("ThongBao").document(notification.maTB)
+                            notificationRef.update("DSNVLike", dsNVLikeTemp - maNV)
+                            dsNVLikeTemp = dsNVLikeTemp - maNV
+                        }
+                    }
                 }
             }
         }
-
-
-//        var authData = Firebase.auth.currentUser
-//        var email = authData?.email
-//        var db = Firebase.firestore
-
-
     }
-
     override fun getItemCount(): Int {
         return listNotification.size
     }
