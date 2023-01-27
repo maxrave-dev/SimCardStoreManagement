@@ -100,16 +100,16 @@ class UserAdapter(private var listUsers: ArrayList<user>, var context: Context):
             }
         }
         var userID: String? = null
-        var db = Firebase.firestore
-        var refUser = db.collection("NhanVien").whereEqualTo("MaNV", user.maNV)
+        val db = Firebase.firestore
+        val refUser = db.collection("NhanVien").whereEqualTo("MaNV", user.maNV)
         refUser.get().addOnSuccessListener { documents ->
             for (document in documents) {
                 userID = document.id
             }
         }
         holder.btEdit.setOnClickListener {
-            var dialogEditUser = EditDialog()
-            var args = Bundle()
+            val dialogEditUser = EditDialog()
+            val args = Bundle()
             args.putString("LastName", user.hoNV)
             args.putString("MiddleName", user.tenLot)
             args.putString("FirstName", user.tenNV)
@@ -125,7 +125,7 @@ class UserAdapter(private var listUsers: ArrayList<user>, var context: Context):
             args.putString("ManagerCode", user.maNQL)
             args.putString("ID", userID)
             dialogEditUser.arguments = args
-            var fm = (context as AppCompatActivity).supportFragmentManager
+            val fm = (context as AppCompatActivity).supportFragmentManager
             dialogEditUser.show(fm, "Edit User")
         }
         holder.btDelete.setOnClickListener{
@@ -140,6 +140,10 @@ class UserAdapter(private var listUsers: ArrayList<user>, var context: Context):
                         db.collection("NhanVien").document(userID!!).delete()
                             .addOnSuccessListener {
                                 Toast.makeText(context, "Xoá thành công", Toast.LENGTH_SHORT).show()
+                                val frgTransaction = (context as AppCompatActivity).supportFragmentManager
+                                val frg = (context as AppCompatActivity).supportFragmentManager.findFragmentByTag("ManageFragment")
+                                frgTransaction.beginTransaction().detach(frg!!).commit()
+                                frgTransaction.beginTransaction().attach(frg).commit()
                             }
                             .addOnFailureListener {
                                 Toast.makeText(context, "Xoá thất bại", Toast.LENGTH_SHORT).show()

@@ -80,9 +80,9 @@ class AdminActivity : AppCompatActivity() {
 
 
         fm.beginTransaction()
-            .add(R.id.flFragment, homeFragment, "1")
-            .add(R.id.flFragment, manageFragment, "2").hide(manageFragment)
-            .add(R.id.flFragment, notificationFragment, "3").hide(notificationFragment).commit()
+            .add(R.id.flFragment, homeFragment, "HomeFragment")
+            .add(R.id.flFragment, manageFragment, "ManageFragment").hide(manageFragment)
+            .add(R.id.flFragment, notificationFragment, "NotificationFragment").hide(notificationFragment).commit()
 
         botomNav.setOnItemSelectedListener {
             item ->

@@ -1,8 +1,6 @@
 package com.maxrave.simcardstoremanagement.other
 
 import android.app.Activity
-import android.app.Dialog
-import android.app.Notification
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
@@ -11,17 +9,17 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import coil.load
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.DialogFragment
+import coil.load
+import coil.request.CachePolicy
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.UploadTask
 import com.google.firebase.storage.ktx.storage
+import com.maxrave.simcardstoremanagement.MainActivity
 import com.maxrave.simcardstoremanagement.R
 import com.maxrave.simcardstoremanagement.databinding.UserAccountDialogLayoutBinding
 
@@ -37,33 +35,32 @@ public class AccountDialog: DialogFragment() {
         if (activityResult.resultCode == Activity.RESULT_OK)
         {
             Log.d("ID", ID.toString())
-            var intentRef = activityResult.data
-            var data = intentRef?.data
+            val intentRef = activityResult.data
+            val data = intentRef?.data
             if (data != null)
             {
                 binding.progressBar.visibility = View.VISIBLE
                 Log.d("Avatar","Có upload")
                 avatarUri = data
-                var st = Firebase.storage
-                var avatarRef = st.reference.child("users/image/${ID}")
-                var uploadTask = avatarRef.putFile(avatarUri)
+                val st = Firebase.storage
+                val avatarRef = st.reference.child("users/image/${ID}")
+                val uploadTask = avatarRef.putFile(avatarUri)
                 var notificationManager = context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
                 uploadTask.addOnProgressListener {
-                    var progress = (100.0 * it.bytesTransferred / it.totalByteCount).toInt()
+                    val progress = (100.0 * it.bytesTransferred / it.totalByteCount).toInt()
                     binding.progressBar.setProgressCompat(progress, true)
                 }
                     .addOnSuccessListener {taskSnapshot->
-                        binding.progressBar.visibility = View.GONE
                             taskSnapshot.storage.downloadUrl.addOnSuccessListener {
                                 downloadUrl->
+                                binding.progressBar.visibility = View.GONE
                                 Log.d("DownloadURL", downloadUrl.toString())
                                 Toast.makeText(context,"Thay đổi ảnh đại diện thành công",Toast.LENGTH_SHORT).show()
-                                var db = Firebase.firestore
-                                var userRef = db.collection("NhanVien").document(ID!!)
+                                val db = Firebase.firestore
+                                val userRef = db.collection("NhanVien").document(ID!!)
                                 Log.d("it", downloadUrl.toString())
                                 userRef.update("Avatar",downloadUrl.toString())
                                 binding.ivAvatar.load(downloadUrl)
-                                dismiss()
                             }
                     }
                     .addOnFailureListener{
@@ -72,6 +69,14 @@ public class AccountDialog: DialogFragment() {
                     }
             }
         }
+    }
+
+    private fun reloadPage() {
+        val frg = parentFragmentManager.findFragmentByTag("AccountDialog")
+        Log.d("frg", frg.toString())
+        val frgTransaction = parentFragmentManager
+        frgTransaction.beginTransaction().detach(frg!!).commit()
+        frgTransaction.beginTransaction().attach(frg).commit()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -87,8 +92,13 @@ public class AccountDialog: DialogFragment() {
         {
             binding.tvAccountPermission.text = "Tài khoản Admin"
         }
+        else{
+            binding.tvAccountPermission.text = "Tài khoản Nhân viên"
+        }
         if (mArgs?.getString("Avatar") != "") {
-            binding.ivAvatar.load(mArgs?.getString("Avatar"))
+            binding.ivAvatar.load(mArgs?.getString("Avatar")){
+                    memoryCachePolicy(CachePolicy.DISABLED)
+            }
         }
         else
         {
@@ -117,7 +127,7 @@ public class AccountDialog: DialogFragment() {
 
         }
         binding.btAddAvatar.setOnClickListener {
-            var intent = Intent()
+            val intent = Intent()
             intent.type = "image/*"
             intent.action = Intent.ACTION_GET_CONTENT
 
@@ -128,8 +138,30 @@ public class AccountDialog: DialogFragment() {
             Log.d("CHẠY", "Đã chạy intent")
 
         }
+        binding.btLogOut.setOnClickListener {
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Cảnh báo!!!")
+                .setMessage("Bạn có chắc chắn muốn đăng xuất?")
+                .setNegativeButton("Huỷ") { dialog, which ->
+                }
+                .setPositiveButton("Đăng xuất") { dialog, which ->
+                    val intent = Intent(context, MainActivity::class.java)
+                    startActivity(intent)
+                    activity?.finish()
+                }
+                .show()
+
+        }
+        binding.btFeedback.setOnClickListener{
+            val intent = Intent( Intent.ACTION_SENDTO )
+            intent.data = Uri.fromParts("mailto", "ndtminh2608@gmail.com", null)
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Báo lỗi về ứng dụng Quản lý Cửa hàng bán sim")
+            intent.putExtra(Intent.EXTRA_TEXT, "Nội dung báo lỗi")
+            startActivity(intent)
+        }
 
         binding.topAppBar.setNavigationOnClickListener {
+            reloadPage()
             dismiss()
         }
 
@@ -144,16 +176,13 @@ public class AccountDialog: DialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = UserAccountDialogLayoutBinding.inflate(inflater, container, false)
         var wpr = dialog?.window?.attributes
         wpr?.x = 0
         wpr?.y = -400
         dialog?.window?.attributes = wpr
-
-
-
 
         return binding.root
     }

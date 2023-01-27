@@ -31,19 +31,19 @@ public class EditDialog: DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var lastName = view?.findViewById<EditText>(R.id.etLastName)
-        var firstName = view?.findViewById<EditText>(R.id.etFirstName)
-        var middleName = view?.findViewById<EditText>(R.id.etMiddleName)
-        var email = view?.findViewById<EditText>(R.id.etEmail)
-        var role = view?.findViewById<EditText>(R.id.etRole)
-        var address = view?.findViewById<EditText>(R.id.etAddress)
-        var password = view?.findViewById<EditText>(R.id.etPassword)
-        var salary = view?.findViewById<EditText>(R.id.etSalary)
-        var phone = view?.findViewById<EditText>(R.id.etPhoneNumber)
-        var userCode = view?.findViewById<EditText>(R.id.etUserCode)
-        var managerCode = view?.findViewById<EditText>(R.id.etManagerCode)
-        var sex = view?.findViewById<EditText>(R.id.etSex)
-        var birthday = view?.findViewById<EditText>(R.id.etBirthday)
+        val lastName = view.findViewById<EditText>(R.id.etLastName)
+        val firstName = view.findViewById<EditText>(R.id.etFirstName)
+        val middleName = view.findViewById<EditText>(R.id.etMiddleName)
+        val email = view.findViewById<EditText>(R.id.etEmail)
+        val role = view.findViewById<EditText>(R.id.etRole)
+        val address = view.findViewById<EditText>(R.id.etAddress)
+        val password = view.findViewById<EditText>(R.id.etPassword)
+        val salary = view.findViewById<EditText>(R.id.etSalary)
+        val phone = view.findViewById<EditText>(R.id.etPhoneNumber)
+        val userCode = view.findViewById<EditText>(R.id.etUserCode)
+        val managerCode = view.findViewById<EditText>(R.id.etManagerCode)
+        val sex = view.findViewById<EditText>(R.id.etSex)
+        val birthday = view.findViewById<EditText>(R.id.etBirthday)
         val mArgs = arguments
         Log.d("EditDialog", mArgs.toString())
         lastName?.setText(mArgs?.getString("LastName").toString())
@@ -59,10 +59,10 @@ public class EditDialog: DialogFragment() {
         managerCode?.setText(mArgs?.getString("ManagerCode").toString())
         sex?.setText(mArgs?.getString("Sex").toString())
         birthday?.setText(mArgs?.getString("Birthday").toString())
-        var userID = mArgs?.getString("ID")
+        val userID = mArgs?.getString("ID")
 
 
-        var topAppBar = view?.findViewById<androidx.appcompat.widget.Toolbar>(R.id.topAppBar)
+        val topAppBar = view.findViewById<androidx.appcompat.widget.Toolbar>(R.id.topAppBar)
         topAppBar?.setNavigationOnClickListener {
             dismiss()
             Log.d("EditDialog", "Dismiss")
@@ -98,6 +98,7 @@ public class EditDialog: DialogFragment() {
                                     "NgaySinh" to birthday?.text.toString()
                             )).addOnSuccessListener { Log.d("EditDialog", "DocumentSnapshot successfully updated!")
                                 Toast.makeText(requireContext(), "Cập nhật thành công", Toast.LENGTH_SHORT).show()
+                                reloadPage()
                                 dismiss()
                             }
                                 .addOnFailureListener { e -> Log.w("EditDialog", "Error updating document", e)
@@ -112,5 +113,12 @@ public class EditDialog: DialogFragment() {
                 else -> false
             }
         }
+    }
+
+    private fun reloadPage() {
+        val frgTransaction = parentFragmentManager
+        val frg = parentFragmentManager.findFragmentByTag("ManageFragment")
+        frgTransaction.beginTransaction().detach(frg!!).commit()
+        frgTransaction.beginTransaction().attach(frg).commit()
     }
 }

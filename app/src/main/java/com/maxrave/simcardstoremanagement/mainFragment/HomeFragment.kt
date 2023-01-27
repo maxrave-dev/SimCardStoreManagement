@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.maxrave.simcardstoremanagement.R
@@ -21,6 +22,9 @@ class HomeFragment : Fragment() {
     private var chiPhi: Int = 0
     private var countHoaDon: Int = 0
 
+    lateinit var refresh: SwipeRefreshLayout
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,6 +38,8 @@ class HomeFragment : Fragment() {
         formatter.minimumFractionDigits = 0 // set decimal places to 0
 
         binding.linearProgressIndicator.visibility = View.VISIBLE
+
+        refresh = binding.mainContainer
 
         var db = Firebase.firestore
         db.collection("HDMuaHang").get().addOnSuccessListener { result ->
@@ -94,6 +100,16 @@ class HomeFragment : Fragment() {
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error getting documents.", exception)
             }
+
+        refresh.setOnRefreshListener {
+            val frgTransaction = parentFragmentManager
+            var frg = parentFragmentManager.findFragmentByTag("HomeFragment")
+            frgTransaction.beginTransaction().detach(frg!!).commit()
+            frgTransaction.beginTransaction().attach(frg).commit()
+
+            refresh.isRefreshing = false
+        }
+
 
         return view
     }

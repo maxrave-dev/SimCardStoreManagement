@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/refreshSwipe"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".mainFragment.ManageFragment"
     tools:ignore="HardcodedText">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -64,8 +68,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvListEmployee"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:listitem="@layout/item_users">
+                    android:layout_height="wrap_content">
 
                 </androidx.recyclerview.widget.RecyclerView>
 <!--                tools:listitem="@layout/item_users"-->
@@ -157,7 +160,7 @@
                         <Button
                             style="@style/Widget.Material3.Button.TextButton"
                             android:id="@+id/btStockManage"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Kho"
                             android:layout_gravity="center"
@@ -165,7 +168,7 @@
                         <Button
                             style="@style/Widget.Material3.Button.TextButton"
                             android:id="@+id/btProviderManage"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Nhà cung cấp"
                             android:layout_gravity="center"
@@ -173,7 +176,7 @@
                         <Button
                             style="@style/Widget.Material3.Button.TextButton"
                             android:id="@+id/btArchiveManage"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Lưu trữ"
                             android:layout_gravity="center"
@@ -181,7 +184,7 @@
                         <Button
                             style="@style/Widget.Material3.Button.TextButton"
                             android:id="@+id/btProductManage"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Sản phẩm"
                             android:layout_gravity="center"
@@ -267,7 +270,7 @@
                         <Button
                             style="@style/Widget.Material3.Button.TextButton"
                             android:id="@+id/btCustomerManage"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Khách hàng"
                             android:layout_gravity="center"
@@ -275,7 +278,7 @@
                         <Button
                             style="@style/Widget.Material3.Button.TextButton"
                             android:id="@+id/btPromotionManage"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Chương trình khuyến mãi"
                             android:layout_gravity="center"
@@ -283,7 +286,7 @@
                         <Button
                             style="@style/Widget.Material3.Button.TextButton"
                             android:id="@+id/btBillManage"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Hoá đơn"
                             android:layout_gravity="center"
@@ -296,4 +299,5 @@
         </LinearLayout>
 
     </RelativeLayout>
-</androidx.core.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
