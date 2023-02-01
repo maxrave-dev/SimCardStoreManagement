@@ -66,4 +66,6 @@
     <color name= "xanh">#2196F3</color>
     <color name="đỏ">#FF0E00</color>
     <color name="vàng">#FFEB3B</color>
+
+    <color name="background_loading">#56FFFFFF</color>
 </resources>

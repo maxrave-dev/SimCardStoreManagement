@@ -19,19 +19,25 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         firebaseAuth = FirebaseAuth.getInstance()
-        binding.etEmail.doAfterTextChanged{
+        binding.etEmail.doOnTextChanged { text, start, before, count ->
+            binding.tvIncorrectPassword.visibility = android.view.View.GONE
+        }
+        binding.etPassword.doOnTextChanged { text, start, before, count ->
             binding.tvIncorrectPassword.visibility = android.view.View.GONE
         }
         binding.btLogin.setOnClickListener() {
             if (binding.etEmail.text.toString().isNotEmpty() && binding.etPassword.text.toString().isNotEmpty()) {
+                binding.maskedLoadingView.visibility = android.view.View.VISIBLE
                 binding.progressBar.visibility = android.view.View.VISIBLE
                 firebaseAuth.signInWithEmailAndPassword(binding.etEmail.text.toString(), binding.etPassword.text.toString())
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             // Sign in success, update UI with the signed-in user's information
-                            binding.progressBar.visibility = android.view.View.GONE
+
                             val user = firebaseAuth.currentUser
                             val intent = Intent(this, AdminActivity::class.java)
+                            binding.progressBar.visibility = android.view.View.GONE
+                            binding.maskedLoadingView.visibility = android.view.View.GONE
                             startActivity(intent)
                             Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
                         } else {
@@ -42,6 +48,7 @@ class MainActivity : AppCompatActivity() {
                                 Snackbar.Callback()
                             }.show()
                             binding.progressBar.visibility = android.view.View.GONE
+                            binding.maskedLoadingView.visibility = android.view.View.GONE
                             binding.tvIncorrectPassword.visibility = android.view.View.VISIBLE
                         }
                     }

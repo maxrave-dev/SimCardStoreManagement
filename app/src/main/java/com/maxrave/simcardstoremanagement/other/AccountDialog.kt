@@ -22,6 +22,7 @@ import com.google.firebase.storage.ktx.storage
 import com.maxrave.simcardstoremanagement.MainActivity
 import com.maxrave.simcardstoremanagement.R
 import com.maxrave.simcardstoremanagement.databinding.UserAccountDialogLayoutBinding
+import com.maxrave.simcardstoremanagement.manage.user.EditDialog
 
 public class AccountDialog: DialogFragment() {
     var _binding: UserAccountDialogLayoutBinding? = null
@@ -31,7 +32,7 @@ public class AccountDialog: DialogFragment() {
     var ID: String? = null
 
 
-    var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ activityResult ->
+    private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ activityResult ->
         if (activityResult.resultCode == Activity.RESULT_OK)
         {
             Log.d("ID", ID.toString())
@@ -45,7 +46,6 @@ public class AccountDialog: DialogFragment() {
                 val st = Firebase.storage
                 val avatarRef = st.reference.child("users/image/${ID}")
                 val uploadTask = avatarRef.putFile(avatarUri)
-                var notificationManager = context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
                 uploadTask.addOnProgressListener {
                     val progress = (100.0 * it.bytesTransferred / it.totalByteCount).toInt()
                     binding.progressBar.setProgressCompat(progress, true)
@@ -137,6 +137,14 @@ public class AccountDialog: DialogFragment() {
 
             Log.d("CHẠY", "Đã chạy intent")
 
+        }
+        binding.btChangeEmailPassword.setOnClickListener {
+            var dialog = ChangeEmailPasswordDialog()
+            sendBundle = Bundle()
+            sendBundle.putString("Email",mArgs?.getString("Email"))
+            sendBundle.putString("ID",mArgs?.getString("ID"))
+            dialog.arguments = sendBundle
+            dialog.show(parentFragmentManager,"ChangeEmailPasswordDialog")
         }
         binding.btLogOut.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext())

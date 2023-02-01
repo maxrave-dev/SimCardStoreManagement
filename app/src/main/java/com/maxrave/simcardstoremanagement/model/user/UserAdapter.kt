@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.google.android.material.imageview.ShapeableImageView
 import com.maxrave.simcardstoremanagement.R
-import com.maxrave.simcardstoremanagement.other.EditDialog
+import com.maxrave.simcardstoremanagement.manage.user.EditDialog
 import java.text.NumberFormat
 import java.util.*
 import android.content.Context

@@ -1,4 +1,4 @@
-package com.maxrave.simcardstoremanagement.other
+package com.maxrave.simcardstoremanagement.manage.user
 
 import android.os.Bundle
 import android.util.Log
@@ -31,6 +31,8 @@ public class EditDialog: DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val db = Firebase.firestore
+
         val lastName = view.findViewById<EditText>(R.id.etLastName)
         val firstName = view.findViewById<EditText>(R.id.etFirstName)
         val middleName = view.findViewById<EditText>(R.id.etMiddleName)
@@ -44,6 +46,10 @@ public class EditDialog: DialogFragment() {
         val managerCode = view.findViewById<EditText>(R.id.etManagerCode)
         val sex = view.findViewById<EditText>(R.id.etSex)
         val birthday = view.findViewById<EditText>(R.id.etBirthday)
+        //Không chỉnh sửa được email và mật khẩu nên ẩn field đi
+        email.visibility = View.GONE
+        password.visibility = View.GONE
+
         val mArgs = arguments
         Log.d("EditDialog", mArgs.toString())
         lastName?.setText(mArgs?.getString("LastName").toString())
@@ -60,6 +66,7 @@ public class EditDialog: DialogFragment() {
         sex?.setText(mArgs?.getString("Sex").toString())
         birthday?.setText(mArgs?.getString("Birthday").toString())
         val userID = mArgs?.getString("ID")
+
 
 
         val topAppBar = view.findViewById<androidx.appcompat.widget.Toolbar>(R.id.topAppBar)
@@ -79,17 +86,17 @@ public class EditDialog: DialogFragment() {
                             // Respond to negative button press
                         }
                         .setPositiveButton("Lưu") { dialog, which ->
-                            val db = Firebase.firestore
+
+
+
                             val user = db.collection("NhanVien").document(userID.toString())
                             Log.d("EditDialog", user.toString())
                             user.update(mapOf(
                                     "HoNV" to lastName?.text.toString(),
                                     "TenNV" to firstName?.text.toString(),
                                     "TenLot" to middleName?.text.toString(),
-                                    "Email" to email?.text.toString(),
                                     "ChucVu" to role?.text.toString(),
                                     "DiaChi" to address?.text.toString(),
-                                    "MatKhau" to password?.text.toString(),
                                     "Luong" to salary?.text.toString().toInt(),
                                     "SDT" to phone?.text.toString(),
                                     "MaNV" to userCode?.text.toString(),

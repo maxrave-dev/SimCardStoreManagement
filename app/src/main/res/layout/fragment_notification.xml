@@ -5,8 +5,7 @@
     android:id="@+id/notificationContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".mainFragment.NotificationFragment"
-    tools:ignore="HardcodedText">
+    tools:context=".mainFragment.NotificationFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -35,7 +34,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Thông báo"
+        android:text="@string/notification"
         android:textStyle="bold"
         android:layout_marginBottom="10sp"
         android:textAppearance="?attr/textAppearanceTitleLarge" />
@@ -75,7 +74,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textMultiLine"
-                            android:hint="Bạn đang muốn thông báo gì"
+                            android:hint="@string/what_do_u_want_to_post"
                             android:maxLines="10"
                             android:textSize="13sp"/>
 
@@ -85,7 +84,7 @@
                     android:id="@+id/btPost"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Đăng"
+                    android:text="@string/post"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     />
@@ -108,7 +107,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Mới nhất"
+                    android:text="@string/latest"
                     android:layout_marginBottom="10sp"
                     android:textAppearance="?attr/textAppearanceTitleMedium">
 

@@ -11,12 +11,27 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etProviderName"
+            android:id="@+id/etProductName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:startIconDrawable="@drawable/baseline_search_24"
             app:errorEnabled="true"
-            android:hint="@string/provider_name"
+            android:hint="@string/product_name_"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5sp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etProductCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:startIconDrawable="@drawable/baseline_search_24"
+            app:errorEnabled="true"
+            android:hint="@string/product_code"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
@@ -31,7 +46,7 @@
             android:layout_height="wrap_content"
             app:startIconDrawable="@drawable/baseline_search_24"
             app:errorEnabled="true"
-            android:hint="@string/stock_code"
+            android:hint="@string/provider_code_"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
@@ -41,12 +56,12 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etProviderPhoneNumber"
+            android:id="@+id/etSellPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:startIconDrawable="@drawable/baseline_search_24"
             app:errorEnabled="true"
-            android:hint="@string/phone_number"
+            android:hint="@string/sell_price_"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
@@ -56,12 +71,27 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etAddress"
+            android:id="@+id/etImportPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:startIconDrawable="@drawable/baseline_search_24"
             app:errorEnabled="true"
-            android:hint="@string/address"
+            android:hint="@string/import_price_"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5sp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:startIconDrawable="@drawable/baseline_search_24"
+            app:errorEnabled="true"
+            android:hint="@string/note_"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 

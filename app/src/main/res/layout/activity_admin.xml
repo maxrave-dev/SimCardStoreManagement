@@ -16,7 +16,8 @@
                     android:id="@+id/topAppBar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    app:title="Quản lý cửa hàng sim"
+                    app:title="@string/app_full_name"
+                    app:navigationIcon="@drawable/baseline_dehaze_24"
                     app:menu="@menu/top_app_bar"
                     app:titleCentered = "true"
                     app:layout_scrollFlags="scroll|enterAlways|snap" />

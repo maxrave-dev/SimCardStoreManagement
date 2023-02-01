@@ -19,7 +19,7 @@ import com.maxrave.simcardstoremanagement.model.stock.Stock
 import com.maxrave.simcardstoremanagement.model.stock.StockAdapter
 
 
-public class StockDialog : DialogFragment() {
+class StockDialog : DialogFragment() {
     private var _binding: StockDialogBinding? = null
     private val binding get() = _binding!!
     private lateinit var listStock: ArrayList<Stock>
@@ -120,4 +120,8 @@ public class StockDialog : DialogFragment() {
         frgTransaction.beginTransaction().attach(frg).commit()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

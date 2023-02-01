@@ -63,6 +63,7 @@ class NotificationFragment : Fragment() {
                 val notification = Notification(listLike as List<String>, maNV.toString(), content.toString(), time.toString().toInt(), maTB.toString())
                 listNotification.add(notification)
             }
+            listNotification.sortByDescending { it.thoiDiemDang }
             val recyclerView: RecyclerView = binding.rvNotification
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
             val adapter = NotificationAdapter(listNotification)
@@ -94,7 +95,7 @@ class NotificationFragment : Fragment() {
                             .addOnSuccessListener { documentReference ->
                                 db.collection("ThongBao").document(documentReference.id)
                                     .update("MaTB", documentReference.id)
-                                var notification = Notification(
+                                val notification = Notification(
                                     listOf<String>(),
                                     maNV.toString(),
                                     binding.etNotification.text.toString(),

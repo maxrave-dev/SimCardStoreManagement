@@ -1,4 +1,4 @@
-package com.maxrave.simcardstoremanagement.other
+package com.maxrave.simcardstoremanagement.manage.user
 
 import android.os.Bundle
 import android.util.Log
@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
-import com.maxrave.simcardstoremanagement.model.user.user
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.maxrave.simcardstoremanagement.R
@@ -33,22 +33,23 @@ public class AddUserDialog: DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var lastName = view?.findViewById<EditText>(R.id.etLastName)
-        var firstName = view?.findViewById<EditText>(R.id.etFirstName)
-        var middleName = view?.findViewById<EditText>(R.id.etMiddleName)
-        var email = view?.findViewById<EditText>(R.id.etEmail)
-        var role = view?.findViewById<EditText>(R.id.etRole)
-        var address = view?.findViewById<EditText>(R.id.etAddress)
-        var password = view?.findViewById<EditText>(R.id.etPassword)
-        var salary = view?.findViewById<EditText>(R.id.etSalary)
-        var phone = view?.findViewById<EditText>(R.id.etPhoneNumber)
-        var userCode = view?.findViewById<EditText>(R.id.etUserCode)
-        var managerCode = view?.findViewById<EditText>(R.id.etManagerCode)
-        var sex = view?.findViewById<EditText>(R.id.etSex)
-        var birthday = view?.findViewById<EditText>(R.id.etBirthday)
+        val lastName = view.findViewById<EditText>(R.id.etLastName)
+        val firstName = view.findViewById<EditText>(R.id.etFirstName)
+        val middleName = view.findViewById<EditText>(R.id.etMiddleName)
+        val email = view.findViewById<EditText>(R.id.etEmail)
+        val role = view.findViewById<EditText>(R.id.etRole)
+        val address = view.findViewById<EditText>(R.id.etAddress)
+        val password = view.findViewById<EditText>(R.id.etPassword)
+        val salary = view.findViewById<EditText>(R.id.etSalary)
+        val phone = view.findViewById<EditText>(R.id.etPhoneNumber)
+        val userCode = view.findViewById<EditText>(R.id.etUserCode)
+        val managerCode = view.findViewById<EditText>(R.id.etManagerCode)
+        val sex = view.findViewById<EditText>(R.id.etSex)
+        val birthday = view.findViewById<EditText>(R.id.etBirthday)
 
+        val auth = Firebase.auth
 
-        var topAppBar = view?.findViewById<androidx.appcompat.widget.Toolbar>(R.id.topAppBar)
+        var topAppBar = view.findViewById<androidx.appcompat.widget.Toolbar>(R.id.topAppBar)
         topAppBar?.setNavigationOnClickListener {
             dismiss()
             Log.d("EditDialog", "Dismiss")
@@ -79,7 +80,7 @@ public class AddUserDialog: DialogFragment() {
                             }
                             .setPositiveButton("Lưu") { dialog, which ->
                                 val db = Firebase.firestore
-                                var user = hashMapOf(
+                                val user = hashMapOf(
                                     "Avatar" to "",
                                     "ChucVu" to role?.text.toString(),
                                     "DiaChi" to address?.text.toString(),
@@ -98,6 +99,19 @@ public class AddUserDialog: DialogFragment() {
                                 db.collection("NhanVien")
                                     .add(user)
                                     .addOnSuccessListener { documentReference ->
+                                        auth.createUserWithEmailAndPassword(email?.text.toString(), password?.text.toString())
+                                            .addOnCompleteListener { task ->
+                                                if (task.isSuccessful) {
+                                                    val newUser = auth.currentUser
+                                                    val uID = newUser?.uid
+                                                    db.collection("NhanVien").document(documentReference.id).update("UID", uID)
+                                                    Log.d("AddUserDialog", "createUserWithEmail:success")
+                                                } else {
+                                                    Log.w("AddUserDialog", "createUserWithEmail:failure", task.exception)
+                                                    Toast.makeText(context, "Authentication failed.",
+                                                        Toast.LENGTH_SHORT).show()
+                                                }
+                                            }
                                         Log.d("AddUserDialog", "DocumentSnapshot added with ID: ${documentReference.id}")
                                         Toast.makeText(context, "Thêm thành công", Toast.LENGTH_SHORT).show()
                                         val frgTransaction = parentFragmentManager

@@ -1,7 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">SimCardStoreManagement</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="app_full_name">Quản lý cửa hàng sim</string>
     <string name="archive_list">Danh sách lưu trữ</string>
     <string name="archive_list_description">Khi lập hoá đơn nhập hàng mới sẽ tự động thêm Lưu trữ mới</string>

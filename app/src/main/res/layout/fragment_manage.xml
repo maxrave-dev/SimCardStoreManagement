@@ -5,8 +5,7 @@
     android:id="@+id/refreshSwipe"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".mainFragment.ManageFragment"
-    tools:ignore="HardcodedText">
+    tools:context=".mainFragment.ManageFragment">
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -34,7 +33,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Quản lý"
+                android:text="@string/manage"
                 android:textStyle="bold"
                 android:layout_marginBottom="10sp"
                 android:textAppearance="?attr/textAppearanceTitleLarge" />
@@ -59,7 +58,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Danh sách nhân viên"
+                    android:text="@string/user_list"
                     android:layout_marginBottom="10sp"
                     android:textAppearance="?attr/textAppearanceTitleMedium">
 
@@ -78,7 +77,7 @@
                     android:id="@+id/btAddUser"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Thêm nhân viên"
+                    android:text="@string/add_user"
                     android:layout_gravity="end"
                     />
 
@@ -113,14 +112,14 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Quản lý kho"
+                                android:text="@string/stock_manage"
                                 android:textAppearance="?attr/textAppearanceTitleMedium" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Kho, nhà cung cấp, tồn kho và sản phẩm"
+                                android:text="@string/stock_manage_description"
                                 android:textAppearance="?attr/textAppearanceBodyMedium"
                                 android:textColor="?android:attr/textColorSecondary" />
 
@@ -162,7 +161,7 @@
                             android:id="@+id/btStockManage"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Kho"
+                            android:text="@string/stock"
                             android:layout_gravity="center"
                             />
                         <Button
@@ -170,7 +169,7 @@
                             android:id="@+id/btProviderManage"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Nhà cung cấp"
+                            android:text="@string/provider"
                             android:layout_gravity="center"
                             />
                         <Button
@@ -178,7 +177,7 @@
                             android:id="@+id/btArchiveManage"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Lưu trữ"
+                            android:text="@string/archive"
                             android:layout_gravity="center"
                             />
                         <Button
@@ -186,7 +185,7 @@
                             android:id="@+id/btProductManage"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Sản phẩm"
+                            android:text="@string/product"
                             android:layout_gravity="center"
                             />
 
@@ -223,14 +222,14 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Quản lý bán hàng"
+                                android:text="@string/sell_manage"
                                 android:textAppearance="?attr/textAppearanceTitleMedium" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Khách hàng, đơn hàng, hoá đơn"
+                                android:text="@string/sell_manage_description"
                                 android:textAppearance="?attr/textAppearanceBodyMedium"
                                 android:textColor="?android:attr/textColorSecondary" />
 
@@ -272,7 +271,7 @@
                             android:id="@+id/btCustomerManage"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Khách hàng"
+                            android:text="@string/customer"
                             android:layout_gravity="center"
                             />
                         <Button
@@ -280,7 +279,7 @@
                             android:id="@+id/btPromotionManage"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Chương trình khuyến mãi"
+                            android:text="@string/promotion"
                             android:layout_gravity="center"
                             />
                         <Button
@@ -288,7 +287,7 @@
                             android:id="@+id/btBillManage"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Hoá đơn"
+                            android:text="@string/bill"
                             android:layout_gravity="center"
                             />
                     </LinearLayout>

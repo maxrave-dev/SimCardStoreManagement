@@ -13,14 +13,14 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.maxrave.simcardstoremanagement.R
-import com.maxrave.simcardstoremanagement.databinding.ProviderDialogBinding
-import com.maxrave.simcardstoremanagement.model.provider.Provider
-import com.maxrave.simcardstoremanagement.model.provider.ProviderAdapter
+import com.maxrave.simcardstoremanagement.databinding.ProductDialogBinding
+import com.maxrave.simcardstoremanagement.model.product.Product
+import com.maxrave.simcardstoremanagement.model.product.ProductAdapter
 
-class ProviderDialog: DialogFragment() {
-    private var _binding: ProviderDialogBinding? = null
+class ProductDialog: DialogFragment() {
+    private var _binding: ProductDialogBinding? = null
     private val binding get() = _binding!!
-    private lateinit var listProvider: ArrayList<Provider>
+    private lateinit var listProduct: ArrayList<Product>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,58 +32,72 @@ class ProviderDialog: DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = ProviderDialogBinding.inflate(inflater, container, false)
+        _binding = ProductDialogBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        listProvider = ArrayList()
+        listProduct = ArrayList()
         val db = Firebase.firestore
 
         binding.topAppBar.setNavigationOnClickListener {
             dismiss()
         }
 
-        db.collection("NhaCungCap").get().addOnSuccessListener { result ->
+        db.collection("SanPham").get().addOnSuccessListener { result ->
             for (document in result) {
-                val diaChi = document.get("DiaChi")
-                val maNCC = document.get("MaNhaCC")
-                val tenNCC = document.get("TenNhaCC")
-                val sDT = document.get("SDT")
+                val maSP = document.get("MaSP")
+                val tenSP = document.get("TenSP")
+                val maNhaCC = document.get("MaNhaCC")
+                val giaNhap = document.get("GiaNhap")
+                val giaBan = document.get("GiaBan")
+                val ghiChu = document.get("GhiChu")
                 val ID = document.id
-                val provider = Provider(diaChi.toString(), maNCC.toString(), sDT.toString(),tenNCC.toString(), ID)
-                listProvider.add(provider)
+                val product = Product(
+                    ghiChu.toString(),
+                    giaBan.toString().toInt(),
+                    giaNhap.toString().toInt(),
+                    maNhaCC.toString(),
+                    maSP.toString(),
+                    tenSP.toString(),
+                    ID
+                )
+                listProduct.add(product)
             }
-            binding.rvListProvider.apply {
+            binding.rvListProduct.apply {
                 layoutManager = LinearLayoutManager(context)
-                adapter = ProviderAdapter(listProvider, context)
+                adapter = ProductAdapter(listProduct, context)
                 addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
             }
         }.addOnFailureListener {
 
         }
-
-        binding.btAddProvider.setOnClickListener {
-            val alertDialogView = LayoutInflater.from(context).inflate(R.layout.edit_provider_dialog_layout, null)
+        binding.btAddProduct.setOnClickListener {
+            val alertDialogView = LayoutInflater.from(context).inflate(R.layout.product_add_dialog_layout, null)
             MaterialAlertDialogBuilder(requireContext())
                 .setView(alertDialogView)
-                .setTitle("Thêm Nhà cung cấp")
+                .setTitle("Thêm sản phẩm")
                 .setPositiveButton("Lưu") { dialog, which ->
                     // Respond to positive button press
-                    val providerNameEdit = alertDialogView.findViewById<EditText>(R.id.etProviderName)
-                    val providerAddressEdit = alertDialogView.findViewById<EditText>(R.id.etAddress)
+                    val productNameEdit = alertDialogView.findViewById<EditText>(R.id.etProductName)
+                    val productCodeEdit = alertDialogView.findViewById<EditText>(R.id.etProductCode)
                     val providerCodeEdit = alertDialogView.findViewById<EditText>(R.id.etProviderCode)
-                    val providerPhoneNumber = alertDialogView.findViewById<EditText>(R.id.etProviderPhoneNumber)
+                    val sellPriceEdit = alertDialogView.findViewById<EditText>(R.id.etSellPrice)
+                    val importPriceEdit = alertDialogView.findViewById<EditText>(R.id.etImportPrice)
+                    val noteEdit = alertDialogView.findViewById<EditText>(R.id.etNote)
 
-                    if (providerNameEdit.text.toString() != "" && providerAddressEdit.text.toString() != "" && providerCodeEdit.text.toString() != "" && providerPhoneNumber.text.toString() != "") {
-                        db.collection("NhaCungCap").add(
+
+                    if (productNameEdit.text.toString() != "" && productCodeEdit.text.toString() != "" && providerCodeEdit.text.toString() != "" && sellPriceEdit.text.toString() != "" && importPriceEdit.text.toString() != "") {
+                        db.collection("SanPham").add(
                             mapOf(
-                                "TenNhaCC" to providerNameEdit.text.toString(),
-                                "DiaChi" to providerAddressEdit.text.toString(),
+                                "GhiChu" to noteEdit.text.toString(),
+                                "GiaBan" to sellPriceEdit.text.toString(),
+                                "GiaNhap" to importPriceEdit.text.toString(),
                                 "MaNhaCC" to providerCodeEdit.text.toString(),
-                                "SDT" to providerPhoneNumber.text.toString()
+                                "MaSP" to productCodeEdit.text.toString(),
+                                "TenSP" to productNameEdit.text.toString()
                             )
                         ).addOnSuccessListener {
                             Toast.makeText(context, "Thêm thành công", Toast.LENGTH_SHORT).show()
@@ -104,11 +118,10 @@ class ProviderDialog: DialogFragment() {
             reloadPage()
             binding.refreshLayout.isRefreshing = false
         }
-
     }
     private fun reloadPage(){
         val frgTransaction = parentFragmentManager
-        val frg = parentFragmentManager.findFragmentByTag("ProviderDialog")
+        val frg = parentFragmentManager.findFragmentByTag("ProductDialog")
         frgTransaction.beginTransaction().detach(frg!!).commit()
         frgTransaction.beginTransaction().attach(frg).commit()
     }
@@ -117,4 +130,5 @@ class ProviderDialog: DialogFragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }

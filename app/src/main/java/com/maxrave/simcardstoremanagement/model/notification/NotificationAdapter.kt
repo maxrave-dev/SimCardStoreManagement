@@ -34,21 +34,21 @@ class NotificationAdapter(private var listNotification: ArrayList<Notification>)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        var user = Firebase.auth.currentUser
-        var email = user?.email
+        val user = Firebase.auth.currentUser
+        val email = user?.email
 
 
         val notification = listNotification[position]
-        var timeStamp = notification.thoiDiemDang
-        var date = Date(timeStamp.toLong() * 1000)
+        val timeStamp = notification.thoiDiemDang
+        val date = Date(timeStamp.toLong() * 1000)
         holder.time.text = date.toString()
         holder.content.text = notification.noiDung
         holder.loveCount.text = notification.dSNVLike.size.toString()
-        var db = Firebase.firestore
-        var emailRef = db.collection("NhanVien").whereEqualTo("Email", email)
+        val db = Firebase.firestore
+        val emailRef = db.collection("NhanVien").whereEqualTo("Email", email)
         emailRef.get().addOnSuccessListener { documents ->
             for (document in documents) {
-                var maNV = document.data["MaNV"].toString()
+                val maNV = document.data["MaNV"].toString()
                 holder.love.isChecked = notification.dSNVLike.contains(maNV)
             }
             val userRef = db.collection("NhanVien").whereEqualTo("MaNV", notification.maNV)
@@ -62,7 +62,7 @@ class NotificationAdapter(private var listNotification: ArrayList<Notification>)
                     )
                     holder.userCode.text = document.data["MaNV"].toString()
                     holder.userRole.text = document.data["ChucVu"].toString()
-                    var avatar = document.data["Avatar"].toString()
+                    val avatar = document.data["Avatar"].toString()
                     if (avatar != "") {
                         holder.avatar.load(avatar)
                     } else {
@@ -77,8 +77,8 @@ class NotificationAdapter(private var listNotification: ArrayList<Notification>)
                         (holder.loveCount.text.toString().toInt() + 1).toString()
                     emailRef.get().addOnSuccessListener { documents ->
                         for (document in documents) {
-                            var maNV = document.data["MaNV"].toString()
-                            var notificationRef =
+                            val maNV = document.data["MaNV"].toString()
+                            val notificationRef =
                                 db.collection("ThongBao").document(notification.maTB)
                             notificationRef.update("DSNVLike", dsNVLikeTemp + maNV)
                             dsNVLikeTemp = dsNVLikeTemp + maNV
@@ -89,9 +89,9 @@ class NotificationAdapter(private var listNotification: ArrayList<Notification>)
                         (holder.loveCount.text.toString().toInt() - 1).toString()
                     emailRef.get().addOnSuccessListener { documents ->
                         for (document in documents) {
-                            var maNV = document.data["MaNV"].toString()
+                            val maNV = document.data["MaNV"].toString()
                             Log.d("Mã nhân viên", maNV)
-                            var notificationRef =
+                            val notificationRef =
                                 db.collection("ThongBao").document(notification.maTB)
                             notificationRef.update("DSNVLike", dsNVLikeTemp - maNV)
                             dsNVLikeTemp = dsNVLikeTemp - maNV

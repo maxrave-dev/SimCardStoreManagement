@@ -153,6 +153,29 @@
                         android:text="Cập nhật ảnh đại diện"
                         android:textColor="?attr/colorOnBackground" />
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50sp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="35sp"
+                        android:layout_height="35sp"
+                        android:layout_marginStart="20sp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/outline_account_circle_24">
+
+                    </ImageView>
+                    <Button
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:id="@+id/btChangeEmailPassword"
+                        android:layout_marginStart="20sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="viewStart"
+                        android:text="Cập nhật email và mật khẩu"
+                        android:textColor="?attr/colorOnBackground" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"

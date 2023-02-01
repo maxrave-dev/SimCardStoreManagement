@@ -32,5 +32,7 @@ data class user(
     val tenLot: String,
     @SerializedName("TenNV")
     val tenNV: String,
+    @SerializedName("UID")
+    val uID: String,
     var isExpanded: Boolean = false
 )

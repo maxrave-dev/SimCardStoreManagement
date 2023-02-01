@@ -13,11 +13,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.maxrave.simcardstoremanagement.databinding.FragmentManageBinding
+import com.maxrave.simcardstoremanagement.manage.sell.CustomerDialog
+import com.maxrave.simcardstoremanagement.manage.stock.ArchiveDialog
+import com.maxrave.simcardstoremanagement.manage.stock.ProductDialog
 import com.maxrave.simcardstoremanagement.manage.stock.ProviderDialog
 import com.maxrave.simcardstoremanagement.manage.stock.StockDialog
 import com.maxrave.simcardstoremanagement.model.user.UserAdapter
 import com.maxrave.simcardstoremanagement.model.user.user
-import com.maxrave.simcardstoremanagement.other.AddUserDialog
+import com.maxrave.simcardstoremanagement.manage.user.AddUserDialog
 
 class ManageFragment : Fragment() {
     private var _binding : FragmentManageBinding? = null
@@ -35,7 +38,7 @@ class ManageFragment : Fragment() {
         binding.linearProgressIndicator.visibility = View.VISIBLE
         //Quản lý nhân viên
         listUsers = ArrayList()
-        var db = Firebase.firestore
+        val db = Firebase.firestore
         db.collection("NhanVien").get().addOnSuccessListener { result ->
             for (document in result)
             {
@@ -54,6 +57,7 @@ class ManageFragment : Fragment() {
                 val sDT = document.get("SDT")
                 val tenLot = document.get("TenLot")
                 val tenNV = document.get("TenNV")
+                val uID = document.get("UID")
                 val user = user(
                     avatar.toString(),
                     chucVu.toString(),
@@ -68,7 +72,8 @@ class ManageFragment : Fragment() {
                     phai.toString(),
                     sDT.toString(),
                     tenLot.toString(),
-                    tenNV.toString()
+                    tenNV.toString(),
+                    uID.toString()
                 )
                 listUsers.add(user)
             }
@@ -120,9 +125,13 @@ class ManageFragment : Fragment() {
             }
             binding.btArchiveManage.setOnClickListener {
                 Log.d("Click", "Lưu trữ")
+                val archiveDialog = ArchiveDialog()
+                archiveDialog.show(requireActivity().supportFragmentManager, "ArchiveDialog")
             }
             binding.btProductManage.setOnClickListener {
                 Log.d("Click", "Sản phẩm")
+                val productDialog = ProductDialog()
+                productDialog.show(requireActivity().supportFragmentManager, "ProductDialog")
             }
 
         //Quản lý bán hàng
@@ -142,9 +151,10 @@ class ManageFragment : Fragment() {
                 binding.ivSellExpandUp.visibility = View.GONE
             }
         }
-        if (binding.SellExpandable.visibility == View.VISIBLE) {
             binding.btCustomerManage.setOnClickListener {
                 Log.d("Click", "Click")
+                val customerDialog = CustomerDialog()
+                customerDialog.show(requireActivity().supportFragmentManager, "CustomerDialog")
             }
             binding.btPromotionManage.setOnClickListener {
                 Log.d("Click", "Click")
@@ -152,8 +162,6 @@ class ManageFragment : Fragment() {
             binding.btBillManage.setOnClickListener {
                 Log.d("Click", "Click")
             }
-        }
-
         binding.refreshSwipe.setOnRefreshListener {
              reloadPage()
 

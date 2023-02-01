@@ -7,6 +7,7 @@ import android.widget.Toast
 import coil.load
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.google.android.material.color.DynamicColors
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -15,6 +16,7 @@ import com.maxrave.simcardstoremanagement.mainFragment.HomeFragment
 import com.maxrave.simcardstoremanagement.mainFragment.ManageFragment
 import com.maxrave.simcardstoremanagement.mainFragment.NotificationFragment
 import com.maxrave.simcardstoremanagement.other.AccountDialog
+import com.maxrave.simcardstoremanagement.other.SettingDialog
 
 class AdminActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAdminBinding
@@ -24,6 +26,11 @@ class AdminActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (intent.getStringExtra("MaterialYou") == "true") {
+            DynamicColors.applyToActivityIfAvailable(this)
+            val settingDialog = SettingDialog()
+            settingDialog.show(supportFragmentManager, "SettingDialog")
+        }
         binding = ActivityAdminBinding.inflate(layoutInflater)
         val botomNav = binding.bottomNavigation
         val topAppBar = binding.topAppBar
@@ -115,6 +122,10 @@ class AdminActivity : AppCompatActivity() {
                 }
                 else -> false
             }
+        }
+        topAppBar.setNavigationOnClickListener {
+            val settingDialog = SettingDialog()
+            settingDialog.show(supportFragmentManager, "SettingDialog")
         }
 
 
