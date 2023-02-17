@@ -1,5 +1,6 @@
 package com.maxrave.simcardstoremanagement
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -19,6 +20,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         firebaseAuth = FirebaseAuth.getInstance()
+
+
+
+
+
+
         binding.etEmail.doOnTextChanged { text, start, before, count ->
             binding.tvIncorrectPassword.visibility = android.view.View.GONE
         }
@@ -38,6 +45,8 @@ class MainActivity : AppCompatActivity() {
                             val intent = Intent(this, AdminActivity::class.java)
                             binding.progressBar.visibility = android.view.View.GONE
                             binding.maskedLoadingView.visibility = android.view.View.GONE
+
+
                             startActivity(intent)
                             Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
                         } else {

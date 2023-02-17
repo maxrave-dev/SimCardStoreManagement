@@ -14,6 +14,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.maxrave.simcardstoremanagement.databinding.FragmentManageBinding
 import com.maxrave.simcardstoremanagement.manage.sell.CustomerDialog
+import com.maxrave.simcardstoremanagement.manage.sell.PromotionDialog
 import com.maxrave.simcardstoremanagement.manage.stock.ArchiveDialog
 import com.maxrave.simcardstoremanagement.manage.stock.ProductDialog
 import com.maxrave.simcardstoremanagement.manage.stock.ProviderDialog
@@ -158,6 +159,8 @@ class ManageFragment : Fragment() {
             }
             binding.btPromotionManage.setOnClickListener {
                 Log.d("Click", "Click")
+                val promotionDialog = PromotionDialog()
+                promotionDialog.show(requireActivity().supportFragmentManager, "PromotionDialog")
             }
             binding.btBillManage.setOnClickListener {
                 Log.d("Click", "Click")

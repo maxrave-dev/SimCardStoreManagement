@@ -26,8 +26,11 @@ class AdminActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (intent.getStringExtra("MaterialYou") == "true") {
-            DynamicColors.applyToActivityIfAvailable(this)
+        if (intent.getStringExtra("Restart Setting") == "true") {
+            if(intent.getStringExtra("MaterialYou") == "true")
+            {
+                DynamicColors.applyToActivityIfAvailable(this)
+            }
             val settingDialog = SettingDialog()
             settingDialog.show(supportFragmentManager, "SettingDialog")
         }
@@ -35,18 +38,18 @@ class AdminActivity : AppCompatActivity() {
         val botomNav = binding.bottomNavigation
         val topAppBar = binding.topAppBar
         fm = supportFragmentManager
-        var homeFragment = HomeFragment()
-        var manageFragment = ManageFragment()
-        var notificationFragment = NotificationFragment()
+        val homeFragment = HomeFragment()
+        val manageFragment = ManageFragment()
+        val notificationFragment = NotificationFragment()
         var activeFragment: Fragment = homeFragment
 
-        var user = Firebase.auth.currentUser
-        var email = user?.email
+        val user = Firebase.auth.currentUser
+        val emailCurrent = user?.email
 
         currentUserBundle = Bundle()
 
-        var db = Firebase.firestore
-        var userRef = db.collection("NhanVien").whereEqualTo("Email", email)
+        val db = Firebase.firestore
+        val userRef = db.collection("NhanVien").whereEqualTo("Email", emailCurrent)
         userRef.get().addOnSuccessListener { result ->
             for (document in result)
             {

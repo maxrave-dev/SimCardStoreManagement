@@ -10,12 +10,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.DialogFragment
 import coil.load
 import coil.request.CachePolicy
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -139,12 +141,48 @@ public class AccountDialog: DialogFragment() {
 
         }
         binding.btChangeEmailPassword.setOnClickListener {
-            var dialog = ChangeEmailPasswordDialog()
             sendBundle = Bundle()
             sendBundle.putString("Email",mArgs?.getString("Email"))
             sendBundle.putString("ID",mArgs?.getString("ID"))
-            dialog.arguments = sendBundle
-            dialog.show(parentFragmentManager,"ChangeEmailPasswordDialog")
+            fun isEmailValid(email: CharSequence): Boolean {
+                return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+            }
+            var alertDialog = LayoutInflater.from(requireContext()).inflate(R.layout.update_email_password_dialog,null)
+            val etEmail = alertDialog.findViewById<EditText>(R.id.etEmail)
+            val etPassword = alertDialog.findViewById<EditText>(R.id.etPassword)
+            MaterialAlertDialogBuilder(requireContext())
+                .setView(alertDialog)
+                .setTitle("Thay đổi Email và Mật khẩu")
+                .setPositiveButton("Lưu"){
+                        dialog, which ->
+                    if (etEmail.text.toString() != "" && etPassword.text.toString() != "")
+                    {
+                        if (isEmailValid(etEmail.text)){
+                            val auth = FirebaseAuth.getInstance()
+                            val user = auth.currentUser
+                            user!!.updateEmail(etEmail.text.toString())
+                            user.updatePassword(etPassword.text.toString()).addOnSuccessListener {
+                                Toast.makeText(context,"Thay đổi Email và Mật khẩu thành công",Toast.LENGTH_SHORT).show()
+                            }
+                            val db = Firebase.firestore
+                            val userRef = db.collection("NhanVien").document(ID!!)
+                            userRef.update("Email",etEmail.text.toString())
+                            userRef.update("MatKhau",etPassword.text.toString())
+                            dismiss()
+                        }
+                        else{
+                            Toast.makeText(context,"Email không hợp lệ",Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    else
+                    {
+                        Toast.makeText(context,"Vui lòng nhập đầy đủ thông tin",Toast.LENGTH_SHORT).show()
+                    }
+                }
+                .setNegativeButton("Huỷ"){
+                        dialog, which ->
+                }
+                .show()
         }
         binding.btLogOut.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext())

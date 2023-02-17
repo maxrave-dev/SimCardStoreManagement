@@ -56,4 +56,6 @@
     <string name="sell_price_">Giá bán</string>
     <string name="import_price_">Giá nhập</string>
     <string name="note_">Ghi chú</string>
+    <string name="time_application">Thời gian áp dụng: %1$s</string>
+    <string name="priority">Thứ tự ưu tiên: %1$s</string>
 </resources>

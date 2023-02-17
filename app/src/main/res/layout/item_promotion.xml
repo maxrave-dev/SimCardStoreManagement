@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:id="@+id/viewNotExpandable"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10sp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvPromotionName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mua To Giảm  Lớn"
+                    android:textAppearance="?attr/textAppearanceTitleSmall" />
+                <TextView
+                    android:id="@+id/tvPromotionCode"
+                    android:layout_marginStart="15sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="MTGL5"
+                    android:gravity="end"
+                    android:layout_marginEnd="50sp">
+
+                </TextView>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Giảm 5% giá trị đơn hàng"
+                android:textAppearance="?attr/textAppearanceTitleSmall" />
+            <TextView
+                android:id="@+id/tvDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Hóa đơn từ 5.000.000đ trở lên (Không cộng dồn mã KM khác)"
+                android:textAppearance="?attr/textAppearanceBodySmall"
+                android:textColor="?android:attr/textColorSecondary" />
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/time_application"
+                android:textAppearance="?attr/textAppearanceBodySmall"
+                android:textColor="?android:attr/textColorSecondary" />
+            <TextView
+                android:id="@+id/tvPriority"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/priority"
+                android:textAppearance="?attr/textAppearanceBodySmall"
+                android:textColor="?android:attr/textColorSecondary" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/ivExpandDown"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/baseline_keyboard_arrow_down_24"
+            android:contentDescription="@string/app_name"
+            android:visibility="visible">
+
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/ivExpandUp"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/baseline_keyboard_arrow_up_24"
+            android:contentDescription="@string/app_name"
+            android:visibility="gone">
+
+        </ImageView>
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/viewExpandable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/viewNotExpandable"
+        android:gravity="end">
+        <Button
+            style="@style/Widget.Material3.Button.TextButton"
+            android:id="@+id/btDeletePromotion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Xoá" />
+        <Button
+            style="@style/Widget.Material3.Button.TextButton"
+            android:id="@+id/btEditPromotion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sửa"
+            />
+
+    </LinearLayout>
+</RelativeLayout>

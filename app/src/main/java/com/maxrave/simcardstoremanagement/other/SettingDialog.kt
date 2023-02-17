@@ -8,9 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.preference.PreferenceDialogFragmentCompat
+import androidx.preference.PreferenceFragmentCompat
 import com.google.android.material.color.DynamicColors
 import com.maxrave.simcardstoremanagement.R
 import com.maxrave.simcardstoremanagement.databinding.SettingDialogBinding
+
 
 class SettingDialog: DialogFragment() {
     private var _binding: SettingDialogBinding? = null
@@ -58,7 +61,7 @@ class SettingDialog: DialogFragment() {
                 DynamicColors.applyToActivityIfAvailable(requireActivity())
                 val intent: Intent = requireActivity().intent
                 intent.putExtra("MaterialYou", "true")
-                intent.putExtra("Restart Activity", "true")
+                intent.putExtra("Restart Setting", "true")
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                 requireActivity().finish()
 
@@ -67,7 +70,7 @@ class SettingDialog: DialogFragment() {
             else{
                 val intent: Intent = requireActivity().intent
                 intent.putExtra("MaterialYou", "false")
-                intent.putExtra("Restart Activity", "true")
+                intent.putExtra("Restart Setting", "true")
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                 requireActivity().finish()
 

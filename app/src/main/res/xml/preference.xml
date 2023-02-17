@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="Hiện thị">
+        <SwitchPreference
+            android:key="USE_MATERIAL_YOU"
+            android:title="Material You"
+            android:summary="Hiển thị chủ đề Material You với Dynamic Colors"
+            android:defaultValue="false"
+            android:disableDependentsState="true">
+
+        </SwitchPreference>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Nhóm">
+        <EditTextPreference
+            android:title="Leader/Developer"
+            android:summary="Nguyễn Đức Tuấn Minh">
+        </EditTextPreference>
+        <EditTextPreference
+            android:title="Member"
+            android:summary="Lê Bá Kha">
+        </EditTextPreference>
+        <EditTextPreference
+            android:title="Member"
+            android:summary="Thân Trọng Đức">
+        </EditTextPreference>
+        <EditTextPreference
+            android:title="Member"
+            android:summary="Nguyễn Thị Thuý Nga">
+        </EditTextPreference>
+        <EditTextPreference
+            android:title="Member"
+            android:summary="Trần Thành Đạt">
+        </EditTextPreference>
+    </PreferenceCategory>
+
+</androidx.preference.PreferenceScreen>

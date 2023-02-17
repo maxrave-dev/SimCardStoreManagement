@@ -75,7 +75,22 @@ class CustomerAdapter(private var listCustomer: ArrayList<Customer>, var context
                 .show()
         }
         holder.delete.setOnClickListener {
-            db.collection("KhachHang").document(customer.ID).delete()
+
+            MaterialAlertDialogBuilder(context)
+                .setTitle("Xóa khách hàng")
+                .setMessage("Bạn có chắc chắn muốn xoá khách hàng này?")
+                .setPositiveButton("Xóa") { dialog, which ->
+                    // Respond to positive button press
+                    db.collection("KhachHang").document(customer.ID).delete().addOnSuccessListener {
+                        Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show()
+                    }.addOnFailureListener {
+                        Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                .setNegativeButton("Huỷ") { dialog, which ->
+                    // Respond to negative button press
+                }
+                .show()
         }
     }
 }
