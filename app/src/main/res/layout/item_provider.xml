@@ -93,7 +93,7 @@
             android:id="@+id/btDeleteProvider"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Xoá kho" />
+            android:text="Xoá NCC" />
         <Button
             style="@style/Widget.Material3.Button.TextButton"
             android:id="@+id/btEditProvider"

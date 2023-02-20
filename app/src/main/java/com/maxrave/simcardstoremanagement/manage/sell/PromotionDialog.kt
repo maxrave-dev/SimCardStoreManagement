@@ -26,10 +26,9 @@ class PromotionDialog: DialogFragment(){
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = PromotionDialogBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -107,6 +106,10 @@ class PromotionDialog: DialogFragment(){
                     // Respond to negative button press
                 }
                 .show()
+        }
+        binding.refreshLayout.setOnRefreshListener {
+            reloadPage()
+            binding.refreshLayout.isRefreshing = false
         }
     }
 

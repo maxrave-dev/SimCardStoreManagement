@@ -36,7 +36,7 @@ class ProviderAdapter(private var listProvider: ArrayList<Provider>, var context
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        var provider = listProvider[position]
+        val provider = listProvider[position]
         var isExpanded = provider.isExpanded
         holder.expandableLayout.visibility = if (isExpanded) View.VISIBLE else View.GONE
 

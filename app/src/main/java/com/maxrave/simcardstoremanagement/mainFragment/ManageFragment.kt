@@ -14,6 +14,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.maxrave.simcardstoremanagement.databinding.FragmentManageBinding
 import com.maxrave.simcardstoremanagement.manage.sell.CustomerDialog
+import com.maxrave.simcardstoremanagement.manage.sell.InvoiceDialog
 import com.maxrave.simcardstoremanagement.manage.sell.PromotionDialog
 import com.maxrave.simcardstoremanagement.manage.stock.ArchiveDialog
 import com.maxrave.simcardstoremanagement.manage.stock.ProductDialog
@@ -164,6 +165,8 @@ class ManageFragment : Fragment() {
             }
             binding.btBillManage.setOnClickListener {
                 Log.d("Click", "Click")
+                val invoiceDialog = InvoiceDialog()
+                invoiceDialog.show(requireActivity().supportFragmentManager, "InvoiceDialog")
             }
         binding.refreshSwipe.setOnRefreshListener {
              reloadPage()
@@ -182,8 +185,8 @@ class ManageFragment : Fragment() {
         frgTransaction.beginTransaction().attach(frg).commit()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onDestroy() {
+        super.onDestroy()
         _binding = null
     }
 }

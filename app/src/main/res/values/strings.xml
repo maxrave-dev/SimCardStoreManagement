@@ -60,4 +60,13 @@
     <string name="note_">Ghi chú</string>
     <string name="time_application">Thời gian áp dụng: %1$s</string>
     <string name="priority">Thứ tự ưu tiên: %1$s</string>
+    <string name="invoice_code_">Mã hoá đơn: %1$s</string>
+    <string name="customer_code_">Mã khách hàng: %1$s</string>
+    <string name="price_">Đơn giá: %1$s</string>
+    <string name="date_create_">Ngày tạo: %1$s</string>
+    <string name="promotion_code_">Mã giảm giá: %1$s</string>
+    <string name="promotion_value_">Giảm giá: %1$s</string>
+    <string name="shopping_form_">Hình thức mua hàng: %1$s</string>
+    <string name="total_value_">Thành tiền: %1$s</string>
+    <string name="create_invoice_user_code_">Mã nhân viên tạo hoá đơn: %1$s</string>
 </resources>
