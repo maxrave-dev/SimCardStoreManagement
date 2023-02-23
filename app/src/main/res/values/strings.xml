@@ -69,4 +69,12 @@
     <string name="shopping_form_">Hình thức mua hàng: %1$s</string>
     <string name="total_value_">Thành tiền: %1$s</string>
     <string name="create_invoice_user_code_">Mã nhân viên tạo hoá đơn: %1$s</string>
+    <string name="phone_number_">Số Điện Thoại: %1$s</string>
+    <string name="address_">Địa Chỉ: %1$s</string>
+    <string name="cod_">COD: %1$s</string>
+    <string name="invoice_code1_">Mã Biên Lai: %1$s</string>
+    <string name="customer_name_">Tên khách hàng: %1$s</string>
+    <string name="ship_date_">Ngày giao hàng: %1$s</string>
+    <string name="ship_service_">ĐVVC: %1$s</string>
+    <string name="create_receipt_user_code_">Mã nhân viên tạo biên lai: %1$s</string>
 </resources>

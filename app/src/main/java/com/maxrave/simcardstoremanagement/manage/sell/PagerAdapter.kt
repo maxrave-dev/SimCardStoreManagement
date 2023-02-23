@@ -7,13 +7,14 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 class PagerAdapter(activity: FragmentActivity?, val listItems: List<TabItem>) : FragmentStateAdapter(activity!!){
 
     override fun getItemCount(): Int {
-        return 2
+        return 3
     }
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
             0 -> InvoiceBuyFragment()
             1 -> InvoiceShipFragment()
+            2 -> ReceiptFragment()
             else -> InvoiceBuyFragment()
         }
     }

@@ -1,5 +1,6 @@
 package com.maxrave.simcardstoremanagement.model.invoice.buyinvoice
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -7,8 +8,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.maxrave.simcardstoremanagement.R
@@ -49,6 +53,7 @@ class BuyInvoiceAdapter(private var listBuyInvoice: ArrayList<BuyInvoice>, val c
         return listBuyInvoice.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val formatter = NumberFormat.getCurrencyInstance()
         formatter.currency = Currency.getInstance("VND")
@@ -70,7 +75,7 @@ class BuyInvoiceAdapter(private var listBuyInvoice: ArrayList<BuyInvoice>, val c
         holder.promotionCode.text = context.getString(R.string.promotion_code_, buyInvoice.maKM)
         holder.promotionValue.text = context.getString(R.string.promotion_value_, buyInvoice.giamGia.toString())
         holder.form.text = context.getString(R.string.shopping_form_, buyInvoice.hinhThucMH)
-        holder.value.text = context.getString(R.string.total_value_, buyInvoice.thanhTien.toString())
+        holder.value.text = context.getString(R.string.total_value_, formatter.format(buyInvoice.thanhTien))
         holder.userCode.text = context.getString(R.string.create_invoice_user_code_, buyInvoice.maNV)
 
         holder.expandDown.setOnClickListener {
@@ -90,6 +95,72 @@ class BuyInvoiceAdapter(private var listBuyInvoice: ArrayList<BuyInvoice>, val c
                 holder.expandUp.visibility = View.GONE
                 isExpanded = false
             }
+        }
+        holder.delete.setOnClickListener {
+            MaterialAlertDialogBuilder(context)
+                .setTitle("Xoá hóa đơn mua hàng")
+                .setPositiveButton("Xoá"){dialog, which ->
+                    db.collection("HDMuaHang").document(buyInvoice.ID).delete()
+                    notifyDataSetChanged()
+                    Toast.makeText(context, "Xoá thành công", Toast.LENGTH_SHORT).show()
+                }
+                .setNegativeButton("Huỷ"){dialog, which ->
+                }
+                .show()
+        }
+        holder.edit.setOnClickListener {
+            val alertDialogView = LayoutInflater.from(context).inflate(R.layout.edit_buy_invoice_dialog_layout, null)
+            val maHDMH = alertDialogView.findViewById<TextInputEditText>(R.id.etInvoiceCode)
+            val maKH = alertDialogView.findViewById<TextInputEditText>(R.id.etCustomerCode)
+            val maNV = alertDialogView.findViewById<TextInputEditText>(R.id.etUserCode)
+            val maSP = alertDialogView.findViewById<TextInputEditText>(R.id.etProductCode)
+            val maKM = alertDialogView.findViewById<TextInputEditText>(R.id.etPromotionCode)
+            val soLuong = alertDialogView.findViewById<TextInputEditText>(R.id.etUnit)
+            val donGia = alertDialogView.findViewById<TextInputEditText>(R.id.etPrice)
+            val giamGia = alertDialogView.findViewById<TextInputEditText>(R.id.etPromotionValue)
+            val hinhThucMH = alertDialogView.findViewById<TextInputEditText>(R.id.etForm)
+            val ngayTao = alertDialogView.findViewById<TextInputEditText>(R.id.etDate)
+            val thanhTien = alertDialogView.findViewById<TextInputEditText>(R.id.etTotalValue)
+
+            maHDMH.setText(buyInvoice.maHDMH)
+            maKH.setText(buyInvoice.maKH)
+            maNV.setText(buyInvoice.maNV)
+            maSP.setText(buyInvoice.maSP)
+            maKM.setText(buyInvoice.maKM)
+            soLuong.setText(buyInvoice.soLuong.toString())
+            donGia.setText(buyInvoice.donGia.toString())
+            giamGia.setText(buyInvoice.giamGia.toString())
+            hinhThucMH.setText(buyInvoice.hinhThucMH)
+            ngayTao.setText(buyInvoice.ngayTao)
+            thanhTien.setText(buyInvoice.thanhTien.toString())
+
+            MaterialAlertDialogBuilder(context)
+                .setView(alertDialogView)
+                .setTitle("Sửa hóa đơn mua hàng")
+                .setPositiveButton("Lưu") { dialog, which ->
+                    db.collection("HDMuaHang").document(buyInvoice.ID).update(
+                        mapOf("MaHDMH" to maHDMH.text.toString(),
+                        "MaKH" to maKH.text.toString(),
+                        "MaNV" to maNV.text.toString(),
+                        "MaSP" to maSP.text.toString(),
+                        "MaKM" to maKM.text.toString(),
+                        "SoLuong" to soLuong.text.toString().toInt(),
+                        "DonGia" to donGia.text.toString().toInt(),
+                        "GiamGia" to giamGia.text.toString().toInt(),
+                        "HinhThucMH" to hinhThucMH.text.toString(),
+                        "NgayTao" to ngayTao.text.toString(),
+                        "ThanhTien" to thanhTien.text.toString().toInt())
+                    ).addOnSuccessListener {
+                        Toast.makeText(context, "Sửa thành công", Toast.LENGTH_SHORT).show()
+                        notifyDataSetChanged()
+                    }.addOnFailureListener {
+                        Toast.makeText(context, "Sửa thất bại", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                .setNegativeButton("Huỷ"){
+                    dialog, which ->
+                }
+                .show()
         }
     }
 }

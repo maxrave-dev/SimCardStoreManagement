@@ -39,7 +39,8 @@ class InvoiceDialog: DialogFragment() {
         val viewPager = binding.viewPager
         val tabItem = listOf(
             TabItem(InvoiceBuyFragment(), "Hoá đơn mua hàng"),
-            TabItem(InvoiceShipFragment(), "Hoá đơn giao hàng")
+            TabItem(InvoiceShipFragment(), "Hoá đơn giao hàng"),
+            TabItem(ReceiptFragment(), "Biên lai")
         )
         val tabTitles = tabItem.map { it.title }
         val pagerAdapter = PagerAdapter(requireActivity(), tabItem)

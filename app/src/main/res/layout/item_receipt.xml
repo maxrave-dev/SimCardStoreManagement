@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/ivExpandDown"
+        android:layout_width="30sp"
+        android:layout_height="30sp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/baseline_keyboard_arrow_down_24"
+        android:contentDescription="@string/app_name"
+        android:visibility="visible">
+
+    </ImageView>
+
+    <ImageView
+        android:id="@+id/ivExpandUp"
+        android:layout_width="30sp"
+        android:layout_height="30sp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/baseline_keyboard_arrow_up_24"
+        android:contentDescription="@string/app_name"
+        android:visibility="gone">
+
+    </ImageView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10sp">
+
+
+            <TextView
+                android:id="@+id/tvReceiptCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/invoice_code1_"
+                android:textAppearance="?attr/textAppearanceTitleSmall" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/expandableLayout"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tvInvoiceCode"
+                android:layout_marginTop="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/invoice_code_"
+                android:layout_marginEnd="50sp">
+
+            </TextView>
+            <TextView
+                android:id="@+id/tvCustomerCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/customer_code_"
+                />
+            <TextView
+                android:id="@+id/tvDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/date_create_"/>
+            <TextView
+                android:id="@+id/tvPhoneNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/phone_number_"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tvUserCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/create_receipt_user_code_"
+                android:textAppearance="?attr/textAppearanceTitleSmall" />
+
+        </LinearLayout>
+
+        <!--        <RelativeLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:id="@+id/expandableLayout">-->
+        <!--            <LinearLayout-->
+        <!--                android:orientation="vertical"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content">-->
+        <!--                <LinearLayout-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:orientation="horizontal"-->
+        <!--                    android:layout_marginTop="4dp">-->
+        <!--                    <TextView-->
+        <!--                        android:id="@+id/tvInvoiceCode"-->
+        <!--                        android:layout_width="wrap_content"-->
+        <!--                        android:layout_height="wrap_content"-->
+
+        <!--                        android:text="Mã HĐMH: %1$s"-->
+        <!--                        android:textAppearance="?attr/textAppearanceBodySmall"-->
+        <!--                        android:textColor="?android:attr/textColorSecondary" />-->
+        <!--                    <TextView-->
+        <!--                        android:id="@+id/tvCustomerCode"-->
+        <!--                        android:layout_width="match_parent"-->
+        <!--                        android:layout_height="wrap_content"-->
+        <!--                        android:text="@string/customer_code_"-->
+        <!--                        android:layout_marginEnd="50sp"-->
+        <!--                        android:textAppearance="?attr/textAppearanceBodySmall"-->
+        <!--                        android:textColor="?android:attr/textColorSecondary"-->
+        <!--                        android:gravity="end"/>-->
+
+        <!--                </LinearLayout>-->
+
+        <!--                <TextView-->
+        <!--                    android:id="@+id/tvDate"-->
+        <!--                    android:layout_width="wrap_content"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:layout_marginTop="4dp"-->
+        <!--                    android:text="@string/date_create_"-->
+        <!--                    android:textAppearance="?attr/textAppearanceBodySmall"-->
+        <!--                    android:textColor="?android:attr/textColorSecondary" />-->
+        <!--                <TextView-->
+        <!--                    android:id="@+id/tvPhoneNumber"-->
+        <!--                    android:layout_width="wrap_content"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:layout_marginTop="4dp"-->
+        <!--                    android:text="@string/phone_number_"-->
+        <!--                    android:textAppearance="?attr/textAppearanceBodySmall"-->
+        <!--                    android:textColor="?android:attr/textColorSecondary" />-->
+
+        <!--                <TextView-->
+        <!--                    android:id="@+id/tvUserCode"-->
+        <!--                    android:layout_marginTop="4dp"-->
+        <!--                    android:layout_width="wrap_content"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:text="@string/create_invoice_user_code_"-->
+        <!--                    android:textAppearance="?attr/textAppearanceTitleSmall" />-->
+        <!--&lt;!&ndash;            </LinearLayout>&ndash;&gt;-->
+
+        <!--        </RelativeLayout>-->
+        <LinearLayout
+            android:id="@+id/viewExpandable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end">
+            <Button
+                style="@style/Widget.Material3.Button.TextButton"
+                android:id="@+id/btDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Xoá BL" />
+            <Button
+                style="@style/Widget.Material3.Button.TextButton"
+                android:id="@+id/btEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sửa BL"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+</RelativeLayout>

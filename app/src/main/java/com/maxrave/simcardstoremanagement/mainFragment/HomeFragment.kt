@@ -41,7 +41,7 @@ class HomeFragment : Fragment() {
 
         refresh = binding.mainContainer
 
-        var db = Firebase.firestore
+        val db = Firebase.firestore
         db.collection("HDMuaHang").get().addOnSuccessListener { result ->
             doanhThu = 0
             countHoaDon = 0
@@ -49,8 +49,8 @@ class HomeFragment : Fragment() {
 
                 countHoaDon++
                 Log.d(TAG, "${document.id} => ${document.data}")
-                var gia = document.get("DonGia")
-                var soLuong = document.get("SoLuong")
+                val gia = document.get("DonGia")
+                val soLuong = document.get("SoLuong")
                 doanhThu += gia.toString().toInt() * soLuong.toString().toInt()
             }
             val sell = formatter.format(doanhThu)
@@ -66,11 +66,11 @@ class HomeFragment : Fragment() {
             chiPhi = 0
             for (document in result) {
                 Log.d(TAG, "${document.id} => ${document.data}")
-                var gia = document.get("DonGia")
-                var soLuong = document.get("SoLuong")
+                val gia = document.get("DonGia")
+                val soLuong = document.get("SoLuong")
                 chiPhi += gia.toString().toInt() * soLuong.toString().toInt()
             }
-            var loiNhuan = doanhThu - chiPhi
+            val loiNhuan = doanhThu - chiPhi
             val profit = formatter.format(loiNhuan)
             binding.tvAllTimeProfit.text = profit + " VND"
         }

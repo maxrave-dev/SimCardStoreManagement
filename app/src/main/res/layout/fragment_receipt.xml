@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".manage.sell.ReceiptFragment">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10sp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cvReceipt"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:checkable="true"
+            style="?attr/materialCardViewElevatedStyle"
+            android:layout_marginTop="10sp"
+            android:layout_marginBottom="10sp">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvListReceipt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16sp"
+                tools:listitem="@layout/item_receipt">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_receipt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="35sp"
+        android:layout_marginEnd="30sp"
+        android:layout_gravity="bottom|end"
+        app:backgroundTint="?attr/colorPrimaryContainer"
+        app:borderWidth="0dp"
+        app:elevation="6dp"
+        app:fabSize="normal"
+        app:srcCompat = "@drawable/baseline_add_24" />
+</FrameLayout>
