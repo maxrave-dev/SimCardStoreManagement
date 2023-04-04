@@ -137,7 +137,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:gravity="center"
-        android:text="©2023 by maxrave. All for Software Engineer Final Project"
+        android:text=""
         android:textSize="12sp">
 
     </TextView>
