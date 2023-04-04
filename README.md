@@ -33,7 +33,7 @@ Download apk file in Release page
 | Email | Password |
 | --- | --- |
 | ndtminh2608@gmail.com | minhminh |
-| mailto:nv204@gmail.com | minhminh |
-| mailto:nv102@gmail.com | minhminh |
+| nv204@gmail.com | minhminh |
+| nv102@gmail.com | minhminh |
 
 ## This project is used for Software Engineering End Term Project in UEH University, please dont copy and fork this project
