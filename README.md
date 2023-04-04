@@ -10,7 +10,13 @@ A simple Android app to manage a Sim Card Store with many feature.
 
 ## Screenshot
 
-![Screenshot_20230403-104455_SimCardStoreManagement - Sao chép.png](SimCardStoreManagement%20b95c6bb8ed8545c996ea3dce6aabaceb/Screenshot_20230403-104455_SimCardStoreManagement_-_Sao_chp.png)
+<p float="left">
+  <img src="https://user-images.githubusercontent.com/113747128/229680211-41851d70-7c93-4757-9be4-abb879f47c21.png" width="170"/>
+  <img src="https://user-images.githubusercontent.com/113747128/229680475-22b2331a-0951-4b72-8f42-cc1cef893654.png" width="170" />
+  <img src="https://user-images.githubusercontent.com/113747128/229680597-b9436a39-fe18-4743-89a4-44c6e376e3df.png" width="170" />
+  <img src="https://user-images.githubusercontent.com/113747128/229680615-5f6c5df5-f8f2-4013-b187-74c3dd38a68f.png" width="170" />
+</p>
+
 
 ## Using:
 
